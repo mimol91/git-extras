@@ -26,6 +26,7 @@ OPTIONS:
   -f, --final-tag           Newest tag to retrieve commits from in a range
   -s, --start-tag           Oldest tag to retrieve commits from in a range
   -n, --no-merges           Suppress commits from merged branches
+  -m, --merges-only         Show only commits from merged branches
   -p, --prune-old           Replace existing Changelog entirely with new content
   -x, --stdout              Write output to stdout instead of to a Changelog file
   -h, --help, ?             Show this message
@@ -353,6 +354,9 @@ main() {
         ;;
       -n | --no-merges )
         GIT_LOG_OPTS='--no-merges'
+        ;;
+      -m | --merges-only )
+        GIT_LOG_OPTS='--first-parent'
         ;;
       -p | --prune-old )
         option=( $(_setValueForKeyFakeAssocArray "prune_old" true "${option[*]}") )
